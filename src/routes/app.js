@@ -23,7 +23,8 @@ const App = ({ children, dispatch, app, loading, location }) => {
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config
   const current = menu.filter(item => pathToRegexp(item.route || '').exec(pathname))
-  const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
+  //const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
+  const hasPermission = true
   const href = window.location.href
 
   if (lastHref !== href) {
@@ -75,17 +76,17 @@ const App = ({ children, dispatch, app, loading, location }) => {
     menu,
     location,
   }
-  if (openPages && openPages.includes(pathname)) {
-    return (<div>
-      <Loader fullScreen spinning={loading.effects['app/query']} />
-      {children}
-    </div>)
-  }
+  // if (openPages && openPages.includes(pathname)) {
+  //   return (<div>
+  //     <Loader fullScreen spinning={loading.effects['app/query']} />
+  //     {children}
+  //   </div>)
+  // }
   return (
     <div>
       <Loader fullScreen spinning={loading.effects['app/query']} />
       <Helmet>
-        <title>ANTD ADMIN</title>
+        <title>中通同步job后台配置</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href={logo} type="image/x-icon" />
         {iconFontJS && <script src={iconFontJS} />}

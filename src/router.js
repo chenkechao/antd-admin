@@ -17,6 +17,14 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/dashboard')],
       component: () => import('./routes/dashboard/'),
     }, {
+      path: '/jobConfig',
+      models: () => [import('./models/jobConfig')],
+      component: () => import('./routes/jobConfig/'),
+    // }, {
+    //   path: '/jobConfig/:id',
+    //   models: () => [import('./models/jobConfig/detail')],
+    //   component: () => import('./routes/jobConfig/detail/'),
+    }, {
       path: '/user',
       models: () => [import('./models/user')],
       component: () => import('./routes/user/'),
@@ -69,7 +77,7 @@ const Routers = function ({ history, app }) {
     <ConnectedRouter history={history}>
       <App>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/dashboard" />)} />
+          <Route exact path="/" render={() => (<Redirect to="/jobConfig" />)} />
           {
             routes.map(({ path, ...dynamics }, key) => (
               <Route key={key}

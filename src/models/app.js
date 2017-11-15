@@ -67,27 +67,27 @@ export default {
     }, { call, put, select }) {
       const { success, user } = yield call(query, payload)
       const { locationPathname } = yield select(_ => _.app)
-      if (success && user) {
+      //if (success && user) {
         const { list } = yield call(menusService.query)
-        const { permissions } = user
+        //const { permissions } = user
         let menu = list
-        if (permissions.role === EnumRoleType.ADMIN || permissions.role === EnumRoleType.DEVELOPER) {
-          permissions.visit = list.map(item => item.id)
-        } else {
+        //if (permissions.role === EnumRoleType.ADMIN || permissions.role === EnumRoleType.DEVELOPER) {
+        //  permissions.visit = list.map(item => item.id)
+        //} else {
           menu = list.filter((item) => {
             const cases = [
-              permissions.visit.includes(item.id),
-              item.mpid ? permissions.visit.includes(item.mpid) || item.mpid === '-1' : true,
-              item.bpid ? permissions.visit.includes(item.bpid) : true,
+              // permissions.visit.includes(item.id),
+              // item.mpid ? permissions.visit.includes(item.mpid) || item.mpid === '-1' : true,
+              // item.bpid ? permissions.visit.includes(item.bpid) : true,
             ]
             return cases.every(_ => _)
           })
-        }
+       // }
         yield put({
           type: 'updateState',
           payload: {
             user,
-            permissions,
+//            permissions,
             menu,
           },
         })
@@ -96,14 +96,14 @@ export default {
             pathname: '/dashboard',
           }))
         }
-      } else if (config.openPages && config.openPages.indexOf(locationPathname) < 0) {
-        yield put(routerRedux.push({
-          pathname: '/login',
-          search: queryString.stringify({
-            from: locationPathname,
-          }),
-        }))
-      }
+      // } else if (config.openPages && config.openPages.indexOf(locationPathname) < 0) {
+      //   yield put(routerRedux.push({
+      //     pathname: '/login',
+      //     search: queryString.stringify({
+      //       from: locationPathname,
+      //     }),
+      //   }))
+      // }
     },
 
     * logout ({

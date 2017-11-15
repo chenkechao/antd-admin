@@ -9,6 +9,13 @@ let database = [
     route: '/dashboard',
   },
   {
+    id: '100',
+    bpid: '1',
+    name: '任务配置',
+    icon: 'user',
+    route: '/jobConfig',
+  },
+  {
     id: '2',
     bpid: '1',
     name: 'Users',

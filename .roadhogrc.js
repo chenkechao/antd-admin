@@ -19,11 +19,21 @@ export default {
       "changeOrigin": true,
       "pathRewrite": { "^/api/v1/weather": "/v3/weather" }
     },
-    // "/api/v2": {
-    //   "target": "http://192.168.0.110",
-    //   "changeOrigin": true,
-    //   "pathRewrite": { "^/api/v2" : "/api/v2" }
-    // }
+    "/jobConfig": {
+      "target": "http://127.0.0.1:8080",
+      "changeOrigin": true,
+      "pathRewrite": { "^/jobConfigs" : "/jobConfig" }
+    },
+    "/ruleConfig": {
+      "target": "http://127.0.0.1:8080",
+      "changeOrigin": true,
+      "pathRewrite": { "^/ruleConfig" : "/ruleConfig" }
+    },
+    "/zk": {
+      "target": "http://127.0.0.1:8080",
+      "changeOrigin": true,
+      "pathRewrite": { "^/zk" : "/zk" }
+    },
   },
   env: {
     development: {

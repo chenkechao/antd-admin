@@ -1,4 +1,5 @@
-const APIV1 = '/api/v1'
+// const APIV1 = '/api/v1'
+const APIV1 = ''
 const APIV2 = '/api/v2'
 
 module.exports = {
@@ -10,7 +11,8 @@ module.exports = {
   iconFontJS: '/iconfont.js',
   CORS: [],
   openPages: ['/login'],
-  apiPrefix: '/api/v1',
+  //  apiPrefix: '/api/v1',
+  apiPrefix: '',
   APIV1,
   APIV2,
   api: {
@@ -18,6 +20,10 @@ module.exports = {
     userLogout: `${APIV1}/user/logout`,
     userInfo: `${APIV1}/userInfo`,
     users: `${APIV1}/users`,
+    jobConfigs: `${APIV1}/jobConfig/list`,
+    jobConfig: `${APIV1}/jobConfig/:id`,
+    zkConfig: `${APIV1}/zk/:id`,
+    ruleConfig: `${APIV1}/ruleConfig`,
     posts: `${APIV1}/posts`,
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
