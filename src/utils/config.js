@@ -1,5 +1,5 @@
-// const APIV1 = '/api/v1'
-const APIV1 = ''
+//  const APIV1 = '/api/v1'
+const APIV1 = '/api'
 const APIV2 = '/api/v2'
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   CORS: [],
   openPages: ['/login'],
   //  apiPrefix: '/api/v1',
-  apiPrefix: '',
+  apiPrefix: '/api',
   APIV1,
   APIV2,
   api: {
