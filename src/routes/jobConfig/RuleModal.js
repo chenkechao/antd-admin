@@ -31,12 +31,15 @@ const modal = ({
       })
     },
     onEditItem (item) {
-      console.log('fdas')
+      let rule = {
+        currentItemRule: item,
+        ruleModalVisible: true,
+      }
       dispatch({
         type: 'jobConfig/showAddRuleModal',
         payload: {
           modalType: 'updateRule',
-          currentItemRule: item,
+          rule: rule,
         },
       })
     },

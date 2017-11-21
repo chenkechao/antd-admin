@@ -1,7 +1,8 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update, createRule } from 'services/jobConfig'
+import { createConfig, deleteConfig, updateConfig } from 'services/jobConfig'
+import { createRule } from 'services/ruleConfig'
 import * as jobConfigService from 'services/jobConfigs'
 import { pageModel } from './common'
 
@@ -13,20 +14,22 @@ export default modelExtend(pageModel, {
 
   state: {
     currentItem: {},
-    currentItemRule: {},
     currentItemMapping: {},
     modalVisible: false,
-    ruleModalVisible: false,
     addRuleModalVisible: false,
     addMappingModalVisible: false,
-    selectServerModalVisible: false,
-    jobStatusModalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',
+    rule: {
+      currentItemRule: {},
+      ruleModalVisible: false,
+    },
     zk: {
       serverList: [],
+      selectServerModalVisible: false,
       jobStatusList: [],
+      jobStatusModalVisible: false,
     },
     // jobId: 'ordercenter-27',
     // instance: {
@@ -102,11 +105,11 @@ export default modelExtend(pageModel, {
         })
       }
     },
-    * delete ({ payload }, { call, put, select }) {
-      const data = yield call(remove, { id: payload })
-      const { selectedRowKeys } = yield select(_ => _.user)
+    * deleteConfig ({ payload }, { call, put, select }) {
+      const data = yield call(deleteConfig, payload )
+      //  const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
-        yield put({ type: 'updateState', payload: { selectedRowKeys: selectedRowKeys.filter(_ => _ !== payload) } })
+        //  yield put({ type: 'updateState', payload: { selectedRowKeys: selectedRowKeys.filter(_ => _ !== payload) } })
         yield put({ type: 'query' })
       } else {
         throw data
@@ -123,8 +126,8 @@ export default modelExtend(pageModel, {
       }
     },
 
-    * create ({ payload }, { call, put }) {
-      const data = yield call(create, payload)
+    * createConfig ({ payload }, { call, put }) {
+      const data = yield call(createConfig, payload)
       if (data.success) {
         yield put({ type: 'hideModal' })
         yield put({ type: 'query' })
@@ -133,10 +136,10 @@ export default modelExtend(pageModel, {
       }
     },
 
-    * update ({ payload }, { select, call, put }) {
-      const id = yield select(({ user }) => user.currentItem.id)
-      const newUser = { ...payload, id }
-      const data = yield call(update, newUser)
+    * updateConfig ({ payload }, { select, call, put }) {
+      // const id = yield select(({ user }) => user.currentItem.id)
+      // const newUser = { ...payload, id }
+      const data = yield call(updateConfig, payload)
       if (data.success) {
         yield put({ type: 'hideModal' })
         yield put({ type: 'query' })
@@ -161,6 +164,7 @@ export default modelExtend(pageModel, {
       if (data.success) {
         const zk = {
           serverList: data.rows,
+          selectServerModalVisible: true,
         }
         yield put({ type: 'showSelectServerModal', payload: { zk } })
       } else {
@@ -173,6 +177,7 @@ export default modelExtend(pageModel, {
       if (data.success) {
         const zk = {
           jobStatusList: data.rows,
+          jobStatusModalVisible: true,
         }
         yield put({ type: 'showJobStatusModal', payload: { zk } })
       } else {
@@ -194,10 +199,12 @@ export default modelExtend(pageModel, {
     },
 
     showRuleModal (state, { payload }) {
-      return { ...state, ...payload, ruleModalVisible: true }
+      state.rule.ruleModalVisible = true
+      return { ...state, ...payload }
     },
     hideRuleModal (state) {
-      return { ...state, ruleModalVisible: false }
+      state.rule.ruleModalVisible = false
+      return { ...state }
     },
 
     showAddRuleModal (state, { payload }) {
@@ -214,16 +221,20 @@ export default modelExtend(pageModel, {
       return { ...state, addMappingModalVisible: false, modalType: 'createRule' }
     },
     showSelectServerModal (state, { payload }) {
-      return { ...state, ...payload, selectServerModalVisible: true }
+      //  state.zk.selectServerModalVisible = true
+      return { ...state, ...payload }
     },
     hideSelectServerModal (state) {
-      return { ...state, selectServerModalVisible: false }
+      state.zk.selectServerModalVisible = false
+      return { ...state }
     },
     showJobStatusModal (state, { payload }) {
-      return { ...state, ...payload, jobStatusModalVisible: true }
+      //  state.zk.jobStatusModalVisible = true
+      return { ...state, ...payload }
     },
     hideJobStatusModal (state) {
-      return { ...state, jobStatusModalVisible: false }
+      state.zk.jobStatusModalVisible = false
+      return { ...state }
     },
   },
 })

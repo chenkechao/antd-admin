@@ -11,27 +11,27 @@ export async function query (params) {
   })
 }
 
-export async function create (params) {
+export async function createConfig (params) {
   return request({
-    url: jobConfig.replace('/:id', '/create'),
+    url: jobConfig.replace('/:id', '/createConfig'),
     //  url: 'http://localhost:8080/api/v1/jobConfig/create',
     method: 'post',
     data: params,
   })
 }
 
-export async function remove (params) {
+export async function deleteConfig (params) {
   return request({
-    url: jobConfig,
-    method: 'delete',
+    url: jobConfig.replace('/:id', '/deleteConfig'),
+    method: 'post',
     data: params,
   })
 }
 
-export async function update (params) {
+export async function updateConfig (params) {
   return request({
-    url: jobConfig,
-    method: 'patch',
+    url: jobConfig.replace('/:id', '/updateConfig'),
+    method: 'post',
     data: params,
   })
 }

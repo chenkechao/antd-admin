@@ -44,7 +44,7 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
             }}
             title={<span>
               <Icon type="user" />
-              {user.username}
+                chenkechao
             </span>}
           >
             <Menu.Item key="logout">

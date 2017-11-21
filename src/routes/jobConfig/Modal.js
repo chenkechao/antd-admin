@@ -126,4 +126,4 @@ modal.propTypes = {
   onOk: PropTypes.func,
 }
 
-export default Form.create()(modal)
+export default Form.create({})(modal)

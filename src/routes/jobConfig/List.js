@@ -30,7 +30,7 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
       confirm({
         title: '确定要删除吗?',
         onOk () {
-          onDeleteItem(record.id)
+          onDeleteItem(record)
         },
       })
     }

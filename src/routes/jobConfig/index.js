@@ -14,25 +14,24 @@ import AddMappingModal from './AddMappingModal'
 import SelectServerModal from './selectServer/SelectServerModal'
 import JobStatusModal from './jobStatus/JobStatusModal'
 
-
 const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   location.query = queryString.parse(location.search)
-  const { list, pagination, currentItem, currentItemRule, currentItemMapping, modalVisible,
-    ruleModalVisible, addRuleModalVisible, addMappingModalVisible, selectServerModalVisible,
-    jobStatusModalVisible, modalType, isMotion, selectedRowKeys, zk } = jobConfig
+  const { list, pagination, currentItem, currentItemMapping, modalVisible,
+    addRuleModalVisible, addMappingModalVisible,
+    modalType, isMotion, selectedRowKeys, zk, rule } = jobConfig
   const { pageSize } = pagination
-  const modalItem = {}
+  let modalItem = {}
   modalItem.instance = {}
 
-  let ruleItem = {}
+  //  let ruleItem = {}
 
 
   const modalProps = {
-    item: modalType === 'create' ? modalItem : currentItem,
+    item: modalType === 'createConfig' ? modalItem : currentItem,
     visible: modalVisible,
     maskClosable: false,
     confirmLoading: loading.effects['jobConfig/update'],
-    title: `${modalType === 'create' ? '新增配置' : '更新配置'}`,
+    title: `${modalType === 'createConfig' ? '新增配置' : '更新配置'}`,
     wrapClassName: 'vertical-center-modal',
     width: 800,
     onOk (data) {
@@ -50,26 +49,26 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
 
   const ruleModalProps = {
     item: currentItem,
-    visible: ruleModalVisible,
+    visible: rule.ruleModalVisible,
     maskClosable: false,
     dispatch: dispatch,
-    confirmLoading: loading.effects['jobConfig/update'],
-    title: `规则配置`,
+    title: '规则配置',
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddRule (item) {
-      ruleItem = currentItem
+      modalItem = currentItem
       let ruleTemp = {}
       ruleTemp.mapping = []
-      if (ruleItem.rules == null) {
-        ruleItem.rules = []
+      if (modalItem.rules == null) {
+        modalItem.rules = []
       }
-      ruleItem.rules.push(ruleTemp)//  新插入个对象
+      modalItem.rules.push(ruleTemp)//  新插入个对象
+      rule.currentItemRule = modalItem.rules[modalItem.rules.length - 1]
       dispatch({
         type: 'jobConfig/showAddRuleModal',
         payload: {
           modalType: 'createRule',
-          currentItemRule: ruleItem.rules[ruleItem.rules.length - 1],
+          rule: rule,
         },
       })
     },
@@ -87,7 +86,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
 
   const addRuleModalProps = {
     //  item: modalType === 'createRule' ? ruleItem : currentItem,
-    item: currentItemRule,
+    item: rule.currentItemRule,
     visible: addRuleModalVisible,
     maskClosable: false,
     confirmLoading: loading.effects['jobConfig/update'],
@@ -95,12 +94,12 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (item) {
-      console.log(currentItemRule)
+      console.log(rule.currentItemRule)
       dispatch({
         type: 'jobConfig/showAddMappingModal',
         payload: {
           modalType: 'createMapping',
-          currentItemMapping: currentItemRule,
+          currentItemMapping: rule.currentItemRule,
         },
       })
     },
@@ -118,8 +117,10 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       })
     },
     onCancel () {
-      //  取消时从数组删除
-      currentItem.rules.pop()
+      if (modalType === 'createRule') {
+        //  取消时从数组删除
+        currentItem.rules.pop()
+      }
       dispatch({
         type: 'jobConfig/hideAddRuleModal',
       })
@@ -156,7 +157,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
 
   const selectServerModalProps = {
     serverList: zk.serverList,
-    visible: selectServerModalVisible,
+    visible: zk.selectServerModalVisible,
     dispatch: dispatch,
     loading: loading,
     maskClosable: false,
@@ -179,7 +180,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
 
   const jobStatusModalProps = {
     jobStatusList: zk.jobStatusList,
-    visible: jobStatusModalVisible,
+    visible: zk.jobStatusModalVisible,
     dispatch: dispatch,
     maskClosable: false,
     //  confirmLoading: loading.effects['jobConfig/update'],
@@ -225,17 +226,17 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
         },
       }))
     },
-    onDeleteItem (id) {
+    onDeleteItem (item) {
       dispatch({
-        type: 'jobConfig/delete',
-        payload: id,
+        type: 'jobConfig/deleteConfig',
+        payload: item,
       })
     },
     onEditItem (item) {
       dispatch({
         type: 'jobConfig/showModal',
         payload: {
-          modalType: 'update',
+          modalType: 'updateConfig',
           currentItem: item,
         },
       })
@@ -293,7 +294,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       dispatch({
         type: 'jobConfig/showModal',
         payload: {
-          modalType: 'create',
+          modalType: 'createConfig',
         },
       })
     },
@@ -317,11 +318,11 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       <Filter {...filterProps} />
       <List {...listProps} />
       {modalVisible && <Modal {...modalProps} />}
-      {ruleModalVisible && <RuleModal {...ruleModalProps} />}
+      {rule.ruleModalVisible && <RuleModal {...ruleModalProps} />}
       {addRuleModalVisible && <AddRuleModal {...addRuleModalProps} />}
       {addMappingModalVisible && <AddMappingModal {...addMappingModalProps} />}
-      {selectServerModalVisible && <SelectServerModal {...selectServerModalProps} />}
-      {jobStatusModalVisible && <JobStatusModal {...jobStatusModalProps} />}
+      {zk.selectServerModalVisible && <SelectServerModal {...selectServerModalProps} />}
+      {zk.jobStatusModalVisible && <JobStatusModal {...jobStatusModalProps} />}
     </Page>
   )
 }
