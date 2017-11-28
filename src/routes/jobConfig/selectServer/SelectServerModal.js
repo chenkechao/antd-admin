@@ -9,21 +9,9 @@ const modal = ({
   onSelectOk,
   dispatch,
   loading,
-  form: {
-    getFieldDecorator,
-    validateFields,
-    getFieldsValue,
-  },
   ...modalProps
 }) => {
-  // const requestParams = {
-  //   url: 'http://localhost:8080/zk/searhMachine',
-  //   desc: '查询serverList',
-  // }
-  // let serverList = ''
-  // request({ ...requestParams }).then((data) => {
-  //   serverList = data
-  // })
+  //let selectedRowKeys = null
 
   //  const { pageSize } = pagination
   const handleOk = () => {
@@ -34,12 +22,11 @@ const modal = ({
     dataSource: serverList,
     //  loading: loading.effects['jobConfig/searhMachine'],
     rowSelection: {
-      //  selectedRowKeys,
       onChange: (keys) => {
         dispatch({
           type: 'jobConfig/updateState',
           payload: {
-            selectedRowKeys: keys,
+            selectedServerKeys: keys,
           },
         })
       },

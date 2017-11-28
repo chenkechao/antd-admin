@@ -20,6 +20,14 @@ export async function searhMachine (params) {
   })
 }
 
+export async function registerZk (params) {
+  return request({
+    url: zkConfig.replace('/:id', '/registerZk'),
+    method: 'get',
+    data: params,
+  })
+}
+
 export async function searhJobOpearte (params) {
   return request({
     url: jobConfigs.replace('/list', '/searhJobOpearte'),

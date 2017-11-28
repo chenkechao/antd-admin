@@ -20,6 +20,7 @@ export default modelExtend(pageModel, {
     addMappingModalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
+    selectedServerKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',
     rule: {
       currentItemRule: {},
@@ -167,6 +168,16 @@ export default modelExtend(pageModel, {
           selectServerModalVisible: true,
         }
         yield put({ type: 'showSelectServerModal', payload: { zk } })
+      } else {
+        throw data
+      }
+    },
+
+    * registerZk ({ payload }, { call, put }) {
+      console.log(payload);
+      const data = yield call(jobConfigService.registerZk, payload)
+      if (data.success) {
+        yield put({ type: 'hideSelectServerModal' })
       } else {
         throw data
       }

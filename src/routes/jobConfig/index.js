@@ -18,7 +18,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   location.query = queryString.parse(location.search)
   const { list, pagination, currentItem, currentItemMapping, modalVisible,
     addRuleModalVisible, addMappingModalVisible,
-    modalType, isMotion, selectedRowKeys, zk, rule } = jobConfig
+    modalType, isMotion, selectedRowKeys, selectedServerKeys, zk, rule } = jobConfig
   const { pageSize } = pagination
   let modalItem = {}
   modalItem.instance = {}
@@ -166,9 +166,14 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onSelectOk () {
-      //  TODO
+      console.log(selectedServerKeys)
+      let data ={
+        jobId: selectedRowKeys,
+        machineIds: selectedServerKeys
+      }
       dispatch({
-        type: 'jobConfig/hideSelectServerModal',
+        type: `jobConfig/registerZk`,
+        payload: data,
       })
     },
     onCancel () {
