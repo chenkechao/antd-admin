@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Button, Card } from 'antd'
+import { Form, Input, Modal, Button, Card, Alert } from 'antd'
 import RuleList from './RuleList'
 import MappingList from './MappingList'
 
@@ -22,6 +22,7 @@ const modal = ({
   // let mappingDataSource = null
   let currentItemRule = rule.currentItemRule
   let selectRow = rule.selectRow
+  let alertVisible = rule.alertVisible
 
   const handleOk = () => {
     onRuleOk()
@@ -128,6 +129,11 @@ const modal = ({
 
       <Card title="标题">
         <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
+        {alertVisible && <Alert
+          description="请先选择一条规则"
+          type="error"
+          showIcon
+        />}
         <MappingList {...mappingListProps} />
       </Card>
     </Modal>

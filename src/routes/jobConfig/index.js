@@ -74,14 +74,25 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       })
     },
     onAddMapping (item) {
-      console.log(rule.currentItemRule)
-      dispatch({
-        type: 'jobConfig/showAddMappingModal',
-        payload: {
-          modalType: 'createMapping',
-          currentItemMapping: rule.currentItemRule,
-        },
-      })
+      // 判断是否为空对象，如果为空对象说明还没有选中rule
+      if (JSON.stringify(rule.currentItemRule) === '{}') {
+        let ruleNew = Object.assign({}, rule)// 克隆一个新的rule对象
+        ruleNew.alertVisible = true
+        dispatch({
+          type: 'jobConfig/updateState',
+          payload: {
+            rule: ruleNew,
+          },
+        })
+      } else {
+        dispatch({
+          type: 'jobConfig/showAddMappingModal',
+          payload: {
+            modalType: 'createMapping',
+            currentItemMapping: rule.currentItemRule,
+          },
+        })
+      }
     },
     onRuleOk () {
       dispatch({

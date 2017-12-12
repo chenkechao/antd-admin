@@ -26,6 +26,7 @@ export default modelExtend(pageModel, {
       currentItemRule: {}, // 当前选中的rule
       ruleModalVisible: false, // ruleModel是否显示
       selectRow: [], // 代表选择哪条rule
+      alertVisible: false, // 错误提示是否显示
     },
     zk: {
       serverList: [],
@@ -215,7 +216,11 @@ export default modelExtend(pageModel, {
       return { ...state, ...payload }
     },
     hideRuleModal (state) {
+      // 隐藏
       state.rule.ruleModalVisible = false
+      // 数据清空
+      state.rule.currentItemRule = {}
+      state.rule.selectRow = []
       return { ...state }
     },
 
