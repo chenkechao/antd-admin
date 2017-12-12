@@ -11,7 +11,6 @@ import styles from './List.less'
 const confirm = Modal.confirm
 
 const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps }) => {
-
   const handleMenuClick = (record, e) => {
     if (e.key === '1') {
       onEditItem(record)

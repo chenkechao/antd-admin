@@ -98,7 +98,7 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
         scroll={{ x: 1250 }}
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record.jobId}
         getBodyWrapper={getBodyWrapper}
       />
     </div>

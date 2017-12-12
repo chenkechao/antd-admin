@@ -48,6 +48,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   }
 
   const ruleModalProps = {
+    rule: rule,
     item: currentItem,
     visible: rule.ruleModalVisible,
     maskClosable: false,
@@ -211,11 +212,16 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     pagination,
     location,
     onSelectServer (item) {
+      //  单行操作时先清空选中的记录
+      selectedRowKeys.length = 0
+      selectedRowKeys.push(item.jobId)
       dispatch({
         type: 'jobConfig/searhMachine',
       })
     },
     onJobStatus (item) {
+      selectedRowKeys.length = 0
+      selectedRowKeys.push(item.jobId)
       dispatch({
         type: 'jobConfig/jobStatus',
       })

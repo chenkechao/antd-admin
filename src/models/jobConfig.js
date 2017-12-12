@@ -25,6 +25,8 @@ export default modelExtend(pageModel, {
     rule: {
       currentItemRule: {},
       ruleModalVisible: false,
+      mappingList: [],
+      selectRow: [], // 代表选择哪条rule
     },
     zk: {
       serverList: [],
