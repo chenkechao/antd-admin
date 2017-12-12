@@ -23,9 +23,8 @@ export default modelExtend(pageModel, {
     selectedServerKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',
     rule: {
-      currentItemRule: {},
-      ruleModalVisible: false,
-      mappingList: [],
+      currentItemRule: {}, // 当前选中的rule
+      ruleModalVisible: false, // ruleModel是否显示
       selectRow: [], // 代表选择哪条rule
     },
     zk: {

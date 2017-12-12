@@ -73,6 +73,16 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
         },
       })
     },
+    onAddMapping (item) {
+      console.log(rule.currentItemRule)
+      dispatch({
+        type: 'jobConfig/showAddMappingModal',
+        payload: {
+          modalType: 'createMapping',
+          currentItemMapping: rule.currentItemRule,
+        },
+      })
+    },
     onRuleOk () {
       dispatch({
         type: 'jobConfig/hideRuleModal',

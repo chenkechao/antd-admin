@@ -8,6 +8,7 @@ const modal = ({
   rule,
   item = {},
   onAddRule,
+  onAddMapping,
   dispatch,
   onRuleOk,
   form: {
@@ -18,7 +19,8 @@ const modal = ({
   ...modalProps
 }) => {
   //  const { pageSize } = pagination
-  let mappingDataSource = null
+  // let mappingDataSource = null
+  let currentItemRule = rule.currentItemRule
   let selectRow = rule.selectRow
 
   const handleOk = () => {
@@ -26,7 +28,7 @@ const modal = ({
   }
 
   const mappingListProps = {
-    dataSource: rule.mappingList,
+    dataSource: currentItemRule.mapping,
     //  loading: loading.effects['jobConfig/query'],
     //  pagination,
     useFixedHeader: true, // 固定表头
@@ -66,10 +68,9 @@ const modal = ({
         selectRow.pop()
       }
       selectRow.push(row.currentTarget)
-      mappingDataSource = selectedRows.mapping
       row.currentTarget.bgColor = '#ECF6FD'
       let rule = {
-        mappingList: mappingDataSource,
+        currentItemRule: selectedRows,
         ruleModalVisible: true,
         selectRow: selectRow,
       }
@@ -125,8 +126,8 @@ const modal = ({
       <Button size="large" type="ghost" onClick={onAddRule}>添加规则</Button>
       <RuleList {...ruleListProps} />
 
-      <Card title="卡片标题">
-        <Button size="large" type="ghost">添加mapping</Button>
+      <Card title="标题">
+        <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
         <MappingList {...mappingListProps} />
       </Card>
     </Modal>
@@ -141,6 +142,7 @@ modal.propTypes = {
   item: PropTypes.object,
   onRuleOk: PropTypes.func,
   dispatch: PropTypes.func,
+  onAddMapping: PropTypes.func,
 }
 
 export default Form.create()(modal)
