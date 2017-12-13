@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Button, Card, Alert } from 'antd'
+import { Form, Input, Modal, Button, Card, Alert, Divider } from 'antd'
 import RuleList from './RuleList'
 import MappingList from './MappingList'
 
@@ -30,8 +30,7 @@ const modal = ({
 
   const mappingListProps = {
     dataSource: currentItemRule.mapping,
-    //  loading: loading.effects['jobConfig/query'],
-    //  pagination,
+    pagination: false,
     useFixedHeader: true, // 固定表头
     onDeleteItem (id) {
       dispatch({
@@ -54,6 +53,7 @@ const modal = ({
 
   const ruleListProps = {
     dataSource: item.rules,
+    pagination: false,
     onDeleteItem (ruleName) {
       dispatch({
         type: 'jobConfig/deleteRule',
@@ -126,15 +126,15 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Button size="large" type="ghost" onClick={onAddRule}>添加规则</Button>
+      <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
+      {alertVisible && <Alert
+        description="请先选择一条规则"
+        type="error"
+        showIcon
+      />}
       <RuleList {...ruleListProps} />
-
-      <Card title="标题">
-        <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
-        {alertVisible && <Alert
-          description="请先选择一条规则"
-          type="error"
-          showIcon
-        />}
+      <Divider></Divider>
+      <Card title="mapping">
         <MappingList {...mappingListProps} />
       </Card>
     </Modal>

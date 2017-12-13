@@ -3,7 +3,7 @@
   "name": "antd-admin",
   "version": "4.3.7",
   "dependencies": {
-    "antd": "^2.13.8",
+    "antd": "^3.0.1",
     "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
@@ -60,7 +60,9 @@
     "redbox-react": "^1.2.10",
     "roadhog": "^1.2.2"
   },
-  "pre-commit": ["lint"],
+  "pre-commit": [
+    "lint"
+  ],
   "scripts": {
     "dev": "cross-env BROWSER=none HOST=0.0.0.0 roadhog server",
     "start": "roadhog buildDll & cross-env BROWSER=none HOST=0.0.0.0 roadhog server",

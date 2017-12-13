@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal } from 'antd'
+import { Table, Modal, Tag } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 //  import { Link } from 'react-router-dom'
@@ -33,6 +33,15 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
       title: 'db',
       dataIndex: 'db',
       key: 'db',
+    }, {
+      title: 'mappings',
+      key: 'mapping',
+      width: 500,
+      render: (text, record) => {
+        return record.mapping.map((item) => {
+          return <Tag color="blue">{item.table}</Tag>
+        })
+      },
     }, {
       title: '操作',
       key: 'operation',
