@@ -15,7 +15,7 @@ const formItemLayout = {
 }
 
 const modal = ({
-  item = {},
+  itemMapping = {},
   onAddMappingOk,
   dispatch,
   form: {

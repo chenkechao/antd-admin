@@ -39,7 +39,7 @@ const modal = ({
     })
   }
 
-  const listProps = {
+  const mappingListProps = {
     dataSource: item.mapping,
     pagination: false,
     onDeleteItem (id) {
@@ -93,7 +93,7 @@ const modal = ({
         </FormItem>
       </Form>
       <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
-      <MappingList {...listProps} />
+      <MappingList {...mappingListProps} />
     </Modal>
   )
 }

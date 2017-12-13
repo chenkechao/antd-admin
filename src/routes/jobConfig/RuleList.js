@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Table, Modal, Tag } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
-//  import { Link } from 'react-router-dom'
-import queryString from 'query-string'
 import AnimTableBody from 'components/DataTable/AnimTableBody'
 import styles from './List.less'
 
@@ -31,8 +29,14 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
       key: 'rule',
     }, {
       title: 'db',
-      dataIndex: 'db',
       key: 'db',
+      render: (text, record) => {
+        if (record.hasOwnProperty('db')) {
+          return record.db.map((item) => {
+            return <Tag color="blue">{item}</Tag>
+          })
+        }
+      },
     }, {
       title: 'mappings',
       key: 'mapping',

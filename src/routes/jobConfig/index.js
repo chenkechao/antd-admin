@@ -23,16 +23,12 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   let modalItem = {}
   modalItem.instance = {}
 
-  //  let ruleItem = {}
-
-
+  // 添加job modal配置
   const modalProps = {
     item: modalType === 'createConfig' ? modalItem : currentItem,
     visible: modalVisible,
-    maskClosable: false,
     confirmLoading: loading.effects['jobConfig/update'],
     title: `${modalType === 'createConfig' ? '新增配置' : '更新配置'}`,
-    wrapClassName: 'vertical-center-modal',
     width: 800,
     onOk (data) {
       dispatch({
@@ -47,11 +43,11 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     },
   }
 
+  // 规则配置modal
   const ruleModalProps = {
     rule: rule,
     item: currentItem,
     visible: rule.ruleModalVisible,
-    maskClosable: false,
     dispatch: dispatch,
     title: '规则配置',
     wrapClassName: 'vertical-center-modal',
@@ -106,17 +102,14 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     },
   }
 
+  // 添加rule modal
   const addRuleModalProps = {
-    //  item: modalType === 'createRule' ? ruleItem : currentItem,
     item: rule.currentItemRule,
     visible: addRuleModalVisible,
-    maskClosable: false,
-    confirmLoading: loading.effects['jobConfig/update'],
     title: `${modalType === 'createRule' ? '新增规则' : '更新规则'}`,
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (item) {
-      console.log(rule.currentItemRule)
       dispatch({
         type: 'jobConfig/showAddMappingModal',
         payload: {
@@ -150,17 +143,14 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   }
 
   const addMappingModalProps = {
-    //  item: modalType === 'createMapping' ? modalItem : currentItem,
-    item: currentItemMapping,
+    itemMapping: currentItemMapping,
     visible: addMappingModalVisible,
-    maskClosable: false,
-    confirmLoading: loading.effects['jobConfig/update'],
     title: `${modalType === 'createMapping' ? '新增mapping' : '更新mapping'}`,
     wrapClassName: 'vertical-center-modal',
     width: 800,
     onAddMappingOk (data) {
       //  如果没有mapping数组先构建
-      console.log(currentItemMapping)
+      console.log("itemMapping"+currentItemMapping)
       if (!currentItemMapping.hasOwnProperty('mapping')) {
         currentItemMapping.mapping = []
       }
@@ -273,7 +263,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
         },
       })
     },
-    //  选中其中一条配置规则
+    //  选中其中一条规则配置
     onRuleConfig (item) {
       dispatch({
         type: 'jobConfig/showRule',
