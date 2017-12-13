@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal, Button } from 'antd'
+import { Table, Modal, Button, Divider } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
-//  import { Link } from 'react-router-dom'
 import queryString from 'query-string'
 import AnimTableBody from 'components/DataTable/AnimTableBody'
 import styles from './List.less'
@@ -71,8 +70,10 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
       width: 300,
       render: (text, record) => {
         return (<div>
-          <Button size="large" type="ghost" onClick={e => handleSelectServer(record, e)}>选择服务器</Button>
-          <Button size="large" type="ghost" onClick={e => handleJobStatus(record, e)}>运行状态</Button>
+          <a href="#" onClick={e => handleSelectServer(record, e)}>选择服务器</a>
+          <Divider type="vertical" />
+          <a href="#" onClick={e => handleJobStatus(record, e)}>运行状态</a>
+          <Divider type="vertical" />
           <DropOption onMenuClick={e => handleMenuClick(record, e)}
             menuOptions={[
               { key: '0', name: '规则配置' },

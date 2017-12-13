@@ -186,7 +186,6 @@ export default modelExtend(pageModel, {
 
     * deleteRule ({ payload }, { call, put, select }) {
       const data = yield call(deleteRule, payload )
-      //  const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
         const jobModel = yield call(getRuleListByJobId, payload )
         yield put({

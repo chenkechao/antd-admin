@@ -41,8 +41,7 @@ const modal = ({
 
   const listProps = {
     dataSource: item.mapping,
-    //  loading: loading.effects['jobConfig/query'],
-    //  pagination,
+    pagination: false,
     onDeleteItem (id) {
       dispatch({
         type: 'jobConfig/delete',

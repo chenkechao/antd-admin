@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Button, Card, Alert, Divider } from 'antd'
+import { Form, Modal, Button, Card, Alert, Divider } from 'antd'
 import RuleList from './RuleList'
 import MappingList from './MappingList'
 
@@ -11,15 +11,8 @@ const modal = ({
   onAddMapping,
   dispatch,
   onRuleOk,
-  form: {
-    getFieldDecorator,
-    validateFields,
-    getFieldsValue,
-  },
   ...modalProps
 }) => {
-  //  const { pageSize } = pagination
-  // let mappingDataSource = null
   let currentItemRule = rule.currentItemRule
   let selectRow = rule.selectRow
   let alertVisible = rule.alertVisible
@@ -117,6 +110,10 @@ const modal = ({
     },
   }
 
+  const cardProps = {
+    title: currentItemRule.rule,
+  }
+
   //  modal组件默认确认取消事件，如果想修改需要重新定义事件
   const modalOpts = {
     ...modalProps,
@@ -134,7 +131,7 @@ const modal = ({
       />}
       <RuleList {...ruleListProps} />
       <Divider></Divider>
-      <Card title="mapping">
+      <Card {...cardProps}>
         <MappingList {...mappingListProps} />
       </Card>
     </Modal>
