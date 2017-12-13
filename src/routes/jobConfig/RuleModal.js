@@ -54,12 +54,13 @@ const modal = ({
 
   const ruleListProps = {
     dataSource: item.rules,
-    //  loading: loading.effects['jobConfig/query'],
-    //  pagination,
-    onDeleteItem (id) {
+    onDeleteItem (ruleName) {
       dispatch({
-        type: 'jobConfig/delete',
-        payload: id,
+        type: 'jobConfig/deleteRule',
+        payload: {
+          ruleName: ruleName,
+          jobId: item.jobId,
+        },
       })
     },
     // 单击一列响应事件

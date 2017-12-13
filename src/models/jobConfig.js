@@ -2,7 +2,7 @@
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
 import { createConfig, deleteConfig, updateConfig } from 'services/jobConfig'
-import { createRule } from 'services/ruleConfig'
+import { createRule, deleteRule, getRuleListByJobId } from 'services/ruleConfig'
 import * as jobConfigService from 'services/jobConfigs'
 import { pageModel } from './common'
 
@@ -154,9 +154,30 @@ export default modelExtend(pageModel, {
     * createRule ({ payload }, { call, put }) {
       const data = yield call(createRule, payload)
       if (data.success) {
-        yield put({ type: 'hideRuleModal' })
         yield put({ type: 'hideAddRuleModal' })
         yield put({ type: 'query' })
+      } else {
+        throw data
+      }
+    },
+
+    * updateRule ({ payload }, { call, put }) {
+      // const data = yield call(createRule, payload)
+      // if (data.success) {
+        yield put({ type: 'hideAddRuleModal' })
+      //   yield put({ type: 'query' })
+      // } else {
+      //   throw data
+      // }
+    },
+
+    * deleteRule ({ payload }, { call, put, select }) {
+      console.log(payload)
+      const data = yield call(deleteRule, payload )
+      //  const { selectedRowKeys } = yield select(_ => _.user)
+      if (data.success) {
+        const jobModel = yield call(getRuleListByJobId, payload )
+        yield put({ type: 'updateState', payload: { currentItem: jobModel } })
       } else {
         throw data
       }
@@ -176,7 +197,6 @@ export default modelExtend(pageModel, {
     },
 
     * registerZk ({ payload }, { call, put }) {
-      console.log(payload);
       const data = yield call(jobConfigService.registerZk, payload)
       if (data.success) {
         yield put({ type: 'hideSelectServerModal' })

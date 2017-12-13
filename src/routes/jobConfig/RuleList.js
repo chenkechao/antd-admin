@@ -18,7 +18,7 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
       confirm({
         title: '确定要删除吗?',
         onOk () {
-          onDeleteItem(record.id)
+          onDeleteItem(record.rule)
         },
       })
     }
@@ -60,7 +60,7 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
         bordered
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record.rule}
         getBodyWrapper={getBodyWrapper}
       />
     </div>
