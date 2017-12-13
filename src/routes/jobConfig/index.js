@@ -276,10 +276,9 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     //  选中其中一条配置规则
     onRuleConfig (item) {
       dispatch({
-        type: 'jobConfig/showRuleModal',
+        type: 'jobConfig/showRule',
         payload: {
-          modalType: 'ruleConfig',
-          currentItem: item,
+          jobId: item.jobId,
         },
       })
     },
