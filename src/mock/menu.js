@@ -16,6 +16,13 @@ let database = [
     route: '/jobConfig',
   },
   {
+    id: '101',
+    bpid: '1',
+    name: '机器配置',
+    icon: 'laptop',
+    route: '/machineConfig',
+  },
+  {
     id: '2',
     bpid: '1',
     name: 'Users',

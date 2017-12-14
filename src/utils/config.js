@@ -25,6 +25,7 @@ module.exports = {
     zkConfig: `${APIV1}/zk/:id`,
     ruleConfigs: `${APIV1}/ruleConfig/list`,
     ruleConfig: `${APIV1}/ruleConfig/:id`,
+    machineConfigs: `${APIV1}/machineConfig/list`,
     posts: `${APIV1}/posts`,
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,

@@ -1,0 +1,61 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Table, Modal, Button, Divider, Tag } from 'antd'
+import classnames from 'classnames'
+import { DropOption } from 'components'
+import queryString from 'query-string'
+import AnimTableBody from 'components/DataTable/AnimTableBody'
+import styles from './List.less'
+
+const confirm = Modal.confirm
+
+const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobStatus, isMotion, location, ...tableProps }) => {
+  location.query = queryString.parse(location.search)
+
+  const columns = [
+    {
+      title: 'ip',
+      dataIndex: 'machine.ip',
+      key: 'ip',
+    },
+    {
+      title: 'job',
+      dataIndex: 'jobId',
+      key: 'job',
+    },
+  ]
+
+  const getBodyWrapperProps = {
+    page: location.query.page,
+    current: tableProps.pagination.current,
+  }
+
+  const getBodyWrapper = (body) => { return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body }
+
+  return (
+    <div>
+      <Table
+        {...tableProps}
+        className={classnames({ [styles.table]: true, [styles.motion]: isMotion })}
+        bordered
+        scroll={{ x: 1250 }}
+        columns={columns}
+        simple
+        rowKey={record => record.jobId}
+        getBodyWrapper={getBodyWrapper}
+      />
+    </div>
+  )
+}
+
+List.propTypes = {
+  onDeleteItem: PropTypes.func,
+  onEditItem: PropTypes.func,
+  onRuleConfig: PropTypes.func,
+  onSelectServer: PropTypes.func,
+  onJobStatus: PropTypes.func,
+  isMotion: PropTypes.bool,
+  location: PropTypes.object,
+}
+
+export default List

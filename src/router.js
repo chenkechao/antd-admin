@@ -25,6 +25,14 @@ const Routers = function ({ history, app }) {
     //   models: () => [import('./models/jobConfig/detail')],
     //   component: () => import('./routes/jobConfig/detail/'),
     }, {
+      path: '/machineConfig',
+      models: () => [import('./models/machineConfig')],
+      component: () => import('./routes/machineConfig/'),
+      // }, {
+      //   path: '/jobConfig/:id',
+      //   models: () => [import('./models/jobConfig/detail')],
+      //   component: () => import('./routes/jobConfig/detail/'),
+    }, {
       path: '/user',
       models: () => [import('./models/user')],
       component: () => import('./routes/user/'),
