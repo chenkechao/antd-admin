@@ -11,16 +11,13 @@ const modal = ({
   loading,
   ...modalProps
 }) => {
-  //let selectedRowKeys = null
-
-  //  const { pageSize } = pagination
   const handleOk = () => {
     onSelectOk()
   }
 
   const listProps = {
     dataSource: serverList,
-    //  loading: loading.effects['jobConfig/searhMachine'],
+    pagination: false,
     rowSelection: {
       onChange: (keys) => {
         dispatch({

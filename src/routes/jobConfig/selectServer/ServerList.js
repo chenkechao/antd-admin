@@ -8,11 +8,7 @@ const ServerList = ({ location, ...tableProps }) => {
 
   const columns = [
     {
-      title: '服务器',
-      dataIndex: 'name',
-      key: 'name',
-    }, {
-      title: '地址',
+      title: '服务器IP',
       dataIndex: 'ip',
       key: 'ip',
     },
@@ -26,7 +22,7 @@ const ServerList = ({ location, ...tableProps }) => {
         bordered
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record.ip}
       />
     </div>
   )
