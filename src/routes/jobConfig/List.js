@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal, Button, Divider } from 'antd'
+import { Table, Modal, Button, Divider, Tag } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 import queryString from 'query-string'
@@ -56,6 +56,16 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
       title: 'serverId',
       dataIndex: 'instance.serverId',
       key: 'serverId',
+    }, {
+      title: 'rules',
+      key: 'rules',
+      render: (text, record) => {
+        if (record.hasOwnProperty('rules')&&record.rules != null) {
+          return record.rules.map((item) => {
+            return <Tag color="blue">{item.rule}</Tag>
+          })
+        }
+      },
     }, {
       title: '操作',
       key: 'operation',

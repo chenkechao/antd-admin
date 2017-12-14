@@ -31,7 +31,7 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
       title: 'db',
       key: 'db',
       render: (text, record) => {
-        if (record.hasOwnProperty('db')) {
+        if (record.hasOwnProperty('db')&&record.db != null) {
           return record.db.map((item) => {
             return <Tag color="blue">{item}</Tag>
           })
@@ -42,9 +42,11 @@ const RuleList = ({ onDeleteItem, onEditItem, isMotion, location, ...tableProps 
       key: 'mapping',
       width: 500,
       render: (text, record) => {
-        return record.mapping.map((item) => {
-          return <Tag color="blue">{item.table}</Tag>
-        })
+        if (record.hasOwnProperty('mapping')&&record.mapping != null) {
+          return record.mapping.map((item) => {
+            return <Tag color="blue">{item.table}</Tag>
+          })
+        }
       },
     }, {
       title: '操作',
