@@ -208,7 +208,8 @@ export default modelExtend(pageModel, {
       const data = yield call(jobConfigService.searhMachine, payload)
       if (data.success) {
         const zk = {
-          serverList: data.rows,
+          serverList: data.machineList,
+          selectedServerKeys: data.selectedMachines,
           selectServerModalVisible: true,
         }
         yield put({ type: 'showSelectServerModal', payload: { zk } })
