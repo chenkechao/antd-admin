@@ -20,7 +20,6 @@ export default modelExtend(pageModel, {
     addMappingModalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
-    selectedServerKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',
     rule: {
       currentItemRule: {}, // 当前选中的rule
@@ -30,6 +29,7 @@ export default modelExtend(pageModel, {
     },
     zk: {
       serverList: [],
+      selectedServerKeys: [], // 代表选中的哪些machine
       selectServerModalVisible: false,
       jobStatusList: [],
       jobStatusModalVisible: false,

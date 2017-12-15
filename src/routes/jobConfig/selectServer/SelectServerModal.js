@@ -5,7 +5,7 @@ import { Form, Input, Modal, Button } from 'antd'
 import ServerList from './ServerList'
 
 const modal = ({
-  serverList,
+  zk,
   onSelectOk,
   dispatch,
   loading,
@@ -16,14 +16,17 @@ const modal = ({
   }
 
   const listProps = {
-    dataSource: serverList,
+    dataSource: zk.serverList,
     pagination: false,
     rowSelection: {
-      onChange: (keys) => {
+      onChange: (keys, selectedRowKeys ) => {
+        // selectedRowKeys.push(keys)
+        let zkNew = Object.assign({}, zk)// 克隆一个新的zk对象
+        zkNew.selectedServerKeys = keys
         dispatch({
           type: 'jobConfig/updateState',
           payload: {
-            selectedServerKeys: keys,
+            zk: zkNew,
           },
         })
       },
@@ -48,7 +51,7 @@ modal.propTypes = {
   dispatch: PropTypes.func,
   loading: PropTypes.object,
   type: PropTypes.string,
-  serverList: PropTypes.array,
+  zk: PropTypes.object,
   onSelectOk: PropTypes.func,
 }
 

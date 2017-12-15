@@ -18,7 +18,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   location.query = queryString.parse(location.search)
   const { list, pagination, currentItem, currentItemMapping, modalVisible,
     addRuleModalVisible, addMappingModalVisible,
-    modalType, isMotion, selectedRowKeys, selectedServerKeys, zk, rule } = jobConfig
+    modalType, isMotion, selectedRowKeys, zk, rule } = jobConfig
   const { pageSize } = pagination
   let modalItem = {}
   modalItem.instance = {}
@@ -168,7 +168,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   }
 
   const selectServerModalProps = {
-    serverList: zk.serverList,
+    zk: zk,
     visible: zk.selectServerModalVisible,
     dispatch: dispatch,
     loading: loading,
@@ -178,10 +178,9 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onSelectOk () {
-      console.log(selectedServerKeys)
       let data ={
         jobId: selectedRowKeys,
-        machineIds: selectedServerKeys
+        machineIds: zk.selectedServerKeys,
       }
       dispatch({
         type: `jobConfig/registerZk`,
@@ -228,6 +227,9 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       selectedRowKeys.push(item.jobId)
       dispatch({
         type: 'jobConfig/searhMachine',
+        payload: {
+          jobId: item.jobId,
+        },
       })
     },
     onJobStatus (item) {

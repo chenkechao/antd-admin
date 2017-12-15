@@ -74,8 +74,8 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
         return (<div>
           <a href="#" onClick={e => handleSelectServer(record, e)}>选择服务器</a>
           <Divider type="vertical" />
-          <a href="#" onClick={e => handleJobStatus(record, e)}>运行状态</a>
-          <Divider type="vertical" />
+          {/*<a href="#" onClick={e => handleJobStatus(record, e)}>运行状态</a>*/}
+          {/*<Divider type="vertical" />*/}
           <DropOption onMenuClick={e => handleMenuClick(record, e)}
             menuOptions={[
               { key: '0', name: '规则配置' },
