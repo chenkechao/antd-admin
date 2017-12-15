@@ -26,6 +26,7 @@ module.exports = {
     ruleConfigs: `${APIV1}/ruleConfig/list`,
     ruleConfig: `${APIV1}/ruleConfig/:id`,
     machineConfigs: `${APIV1}/machineConfig/list`,
+    machineConfig: `${APIV1}/machineConfig/:id`,
     posts: `${APIV1}/posts`,
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,

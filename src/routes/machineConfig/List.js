@@ -9,10 +9,19 @@ import styles from './List.less'
 
 const confirm = Modal.confirm
 
-const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobStatus, isMotion, location, ...tableProps }) => {
+const List = ({ onDeleteItem, onEditItem, onRuleConfig,
+  onStartJob, onStopJob, isMotion, location, ...tableProps }) => {
   location.query = queryString.parse(location.search)
 
   let spanSum = 0
+
+  const startJob = (record, e) => {
+    onStartJob(record)
+  }
+
+  const stopJob = (record, e) => {
+    onStopJob(record)
+  }
 
   const columns = [
     {
@@ -24,55 +33,49 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
           children: value,
           props: {},
         };
-
-        // if(spanSum > 0){
-        //   if(index < spanSum-1){
-        //     obj.props.rowSpan = 0
-        //   }else if(index == spanSum-1){
-        //     spanSum += row.machine.jobSize
-        //     obj.props.rowSpan = row.machine.jobSize
-        //   }
-        // }else{
-        //   if(row.machine.jobSize > 0){
-        //     spanSum = row.machine.jobSize
-        //     if(spanSum > 1){
-        //       obj.props.rowSpan = 0
-        //     }
-        //   }
-        // }
-        if(row.machine.jobSize > 1){
-          if(index == spanSum || spanSum == 0){
+        if (row.machine.jobSize > 1) {
+          if (index == spanSum || spanSum == 0) {
             spanSum += row.machine.jobSize
             obj.props.rowSpan = row.machine.jobSize
           }else{
             obj.props.rowSpan = 0
           }
-        }else{
+        } else {
           spanSum ++
         }
-
-        return obj;
+        return obj
       },
     },
     {
       title: 'job',
       dataIndex: 'jobId',
       key: 'job',
-      // render: (text, record, index) => {
-      //   // const obj = {
-      //   //   children: value,
-      //   //   props: {},
-      //   // }
-      //   // if (index === 4) {
-      //   //   obj.props.colSpan = 0
-      //   // }
-      //   // return obj
-      //   if (record.hasOwnProperty('jobOperates')&&record.jobOperates != null) {
-      //     return record.jobOperates.map((item) => {
-      //       return <Tag color="blue">{item.jobId}</Tag>
-      //     })
-      //   }
-      // },
+    },
+    {
+      title: '运行状态',
+      key: 'status',
+      render: (text, record, index) => {
+        let runningTag
+        if (record.status == 1) {
+          runningTag = <Tag color="green">正在运行</Tag>
+        } else {
+          runningTag = <Tag color="red">已经停止</Tag>
+        }
+        return (<div>
+          {runningTag}
+        </div>)
+      },
+    },
+    {
+      title: '操作',
+      key: 'operation',
+      render: (text, record, index) => {
+        return (<div>
+          <a href="#" onClick={e => startJob(record, e)}>启动</a>
+          <Divider type="vertical" />
+          <a href="#" onClick={e => stopJob(record, e)}>停止</a>
+        </div>)
+      },
     },
   ]
 
@@ -102,9 +105,8 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
 List.propTypes = {
   onDeleteItem: PropTypes.func,
   onEditItem: PropTypes.func,
-  onRuleConfig: PropTypes.func,
-  onSelectServer: PropTypes.func,
-  onJobStatus: PropTypes.func,
+  onStartJob: PropTypes.func,
+  onStopJob: PropTypes.func,
   isMotion: PropTypes.bool,
   location: PropTypes.object,
 }

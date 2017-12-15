@@ -14,6 +14,15 @@ const MachineConfig = ({ location, dispatch, machineConfig, loading }) => {
     loading: loading.effects['machineConfig/query'],
     pagination,
     location,
+    onStartJob (item) {
+      dispatch({
+        type: 'machineConfig/startJob',
+        payload: {
+          jobId: item.jobId,
+          machine: item.machine.ip,
+        },
+      })
+    },
   }
   return (
     <Page inner>
