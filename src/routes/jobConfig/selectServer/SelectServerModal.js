@@ -19,10 +19,15 @@ const modal = ({
     dataSource: zk.serverList,
     pagination: false,
     rowSelection: {
-      onChange: (keys, selectedRowKeys ) => {
+      getCheckboxProps(record) {
+        return {
+          defaultChecked: record.select === true, // 配置默认勾选的列
+        }
+      },
+      onChange: (selectedRowKeys, selectedRows ) => {
         // selectedRowKeys.push(keys)
         let zkNew = Object.assign({}, zk)// 克隆一个新的zk对象
-        zkNew.selectedServerKeys = keys
+        zkNew.selectedServerKeys = selectedRowKeys
         dispatch({
           type: 'jobConfig/updateState',
           payload: {
