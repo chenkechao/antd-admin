@@ -23,6 +23,15 @@ const MachineConfig = ({ location, dispatch, machineConfig, loading }) => {
         },
       })
     },
+    onStopJob (item) {
+      dispatch({
+        type: 'machineConfig/stopJob',
+        payload: {
+          jobId: item.jobId,
+          machine: item.machine.ip,
+        },
+      })
+    },
   }
   return (
     <Page inner>

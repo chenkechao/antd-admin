@@ -52,6 +52,14 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
+    * stopJob ({ payload }, { call, put, select }) {
+      const data = yield call(stopJob, payload )
+      if (data.success) {
+        yield put({ type: 'query' })
+      } else {
+        throw data
+      }
+    },
   },
 
   reducers: {

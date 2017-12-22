@@ -70,10 +70,14 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig,
       title: '操作',
       key: 'operation',
       render: (text, record, index) => {
+        let button
+        if (record.status == 1) {
+          button = <Button type="primary" onClick={e => stopJob(record, e)}>停止</Button>
+        } else {
+          button = <Button type="primary" onClick={e => startJob(record, e)}>启动</Button>
+        }
         return (<div>
-          <a href="#" onClick={e => startJob(record, e)}>启动</a>
-          <Divider type="vertical" />
-          <a href="#" onClick={e => stopJob(record, e)}>停止</a>
+          {button}
         </div>)
       },
     },
@@ -95,7 +99,7 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig,
         scroll={{ x: 1250 }}
         columns={columns}
         simple
-        rowKey={record => record.jobId}
+        rowKey={record => record.id}
         getBodyWrapper={getBodyWrapper}
       />
     </div>

@@ -10,3 +10,12 @@ export async function startJob (params) {
     data: params,
   })
 }
+
+export async function stopJob (params) {
+  return request({
+    url: machineConfig.replace('/:id', '/stopJob'),
+    method: 'get',
+    data: params,
+  })
+}
+
