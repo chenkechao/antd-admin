@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { startJob } from 'services/machineConfig'
+import { startJob,stopJob } from 'services/machineConfig'
 import * as machineConfigService from 'services/machineConfigs'
 import { pageModel } from './common'
 const { query } = machineConfigService
