@@ -153,12 +153,16 @@ export default modelExtend(pageModel, {
 
     * showRule ({ payload }, { call, put }) {
       const jobModel = yield call(getRuleListByJobId, payload )
+      let currentItemRule = {}
+      if (jobModel.rules.length > 0) {
+        currentItemRule = jobModel.rules[0]
+      }
       yield put({
         type: 'showRuleModal',
         payload: {
           currentItem: jobModel,
           rule: {
-            currentItemRule: {}, // 当前选中的rule
+            currentItemRule: currentItemRule, // 当前选中的rule
             ruleModalVisible: true, // ruleModel是否显示
             selectRow: [], // 代表选择哪条rule
           },
