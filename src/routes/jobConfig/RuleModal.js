@@ -32,6 +32,15 @@ const modal = ({
         payload: id,
       })
     },
+    onEditItem (record) {
+      dispatch({
+        type: 'jobConfig/showAddMappingModal',
+        payload: {
+          modalType: 'updateMapping',
+          currentItemMapping: record,
+        },
+      })
+    },
     rowSelection: {
       //  selectedRowKeys,
       onChange: (keys) => {

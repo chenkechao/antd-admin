@@ -106,6 +106,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   const addRuleModalProps = {
     item: rule.currentItemRule,
     visible: addRuleModalVisible,
+    dispatch: dispatch,
     title: `${modalType === 'createRule' ? '新增规则' : '更新规则'}`,
     wrapClassName: 'vertical-center-modal',
     width: 1200,
@@ -145,6 +146,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   const addMappingModalProps = {
     itemMapping: currentItemMapping,
     visible: addMappingModalVisible,
+    dispatch: dispatch,
     title: `${modalType === 'createMapping' ? '新增mapping' : '更新mapping'}`,
     wrapClassName: 'vertical-center-modal',
     width: 800,
@@ -154,11 +156,16 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       if (!currentItemMapping.hasOwnProperty('mapping')) {
         currentItemMapping.mapping = []
       }
+      //  columns转换成数组
+      data.columns = data.columns.split(',')
       currentItemMapping.mapping.push(data)
-
       dispatch({
-        type: 'jobConfig/hideAddMappingModal',
+        type: 'jobConfig/createRule',
+        payload: currentItem,
       })
+      // dispatch({
+      //   type: 'jobConfig/hideAddMappingModal',
+      // })
     },
     onCancel () {
       dispatch({

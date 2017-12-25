@@ -48,7 +48,7 @@ const modal = ({
       <Form layout="horizontal">
         <FormItem label="table" hasFeedback {...formItemLayout}>
           {getFieldDecorator('table', {
-            //initialValue: item.table,
+            initialValue: itemMapping.table,
             rules: [
               {
                 required: true,
@@ -58,7 +58,7 @@ const modal = ({
         </FormItem>
         <FormItem label="logical_table" hasFeedback {...formItemLayout}>
           {getFieldDecorator('logical_table', {
-            //initialValue: item.logical_table,
+            initialValue: itemMapping.logical_table,
             rules: [
               {
                 required: true,
@@ -68,7 +68,7 @@ const modal = ({
         </FormItem>
         <FormItem label="topic" hasFeedback {...formItemLayout}>
           {getFieldDecorator('topic', {
-            //initialValue: item.topic,
+            initialValue: itemMapping.topic,
             rules: [
               {
                 required: true,
@@ -76,9 +76,21 @@ const modal = ({
             ],
           })(<Input />)}
         </FormItem>
+        <FormItem label="columns" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('columns', {
+            initialValue: itemMapping.columns,
+            rules: [
+              {
+                required: true,
+                pattern: /,+/,
+                message: 'column每项必须用，号隔开',
+              },
+            ],
+          })(<Input />)}
+        </FormItem>
         <FormItem label="key" hasFeedback {...formItemLayout}>
           {getFieldDecorator('key', {
-            //initialValue: item.key,
+            initialValue: itemMapping.key,
             rules: [
               {
                 required: true,

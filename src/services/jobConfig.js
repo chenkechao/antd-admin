@@ -44,3 +44,13 @@ export async function createRule (params) {
     data: params,
   })
 }
+
+export async function updateRule (params) {
+  console.log(params)
+  return request({
+    url: jobConfig.replace('/:id', '/updateRule'),
+    //  url: 'http://localhost:8080/api/v1/jobConfig/create',
+    method: 'post',
+    data: params,
+  })
+}

@@ -2,7 +2,7 @@
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
 import { createConfig, deleteConfig, updateConfig } from 'services/jobConfig'
-import { createRule, deleteRule, getRuleListByJobId } from 'services/ruleConfig'
+import { createRule, updateRule, deleteRule, getRuleListByJobId } from 'services/ruleConfig'
 import * as jobConfigService from 'services/jobConfigs'
 import { pageModel } from './common'
 
@@ -173,21 +173,21 @@ export default modelExtend(pageModel, {
       const data = yield call(createRule, payload)
       if (data.success) {
         yield put({ type: 'hideAddRuleModal' })
+        yield put({ type: 'hideAddMappingModal' })
         yield put({ type: 'query' })
       } else {
         throw data
       }
     },
     * updateRule ({ payload }, { call, put }) {
-      // const data = yield call(createRule, payload)
-      // if (data.success) {
+      const data = yield call(updateRule, payload)
+      if (data.success) {
         yield put({ type: 'hideAddRuleModal' })
-      //   yield put({ type: 'query' })
-      // } else {
-      //   throw data
-      // }
+        yield put({ type: 'query' })
+      } else {
+        throw data
+      }
     },
-
     * deleteRule ({ payload }, { call, put, select }) {
       const data = yield call(deleteRule, payload )
       if (data.success) {
