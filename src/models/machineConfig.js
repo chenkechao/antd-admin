@@ -17,7 +17,7 @@ export default modelExtend(pageModel, {
     setup ({ dispatch, history }) {
       history.listen((location) => {
         if (location.pathname === '/machineConfig') {
-          const payload = location.query || { current: 1, pageSize: 10 }
+          const payload = location.query || { current: 1, pageSize: 30 }
           dispatch({
             type: 'query',
             payload,
@@ -37,7 +37,7 @@ export default modelExtend(pageModel, {
             list: data.data,
             pagination: {
               current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 10,
+              pageSize: Number(payload.pageSize) || 30,
               total: data.total,
             },
           },
@@ -53,6 +53,7 @@ export default modelExtend(pageModel, {
       }
     },
     * stopJob ({ payload }, { call, put, select }) {
+
       const data = yield call(stopJob, payload )
       if (data.success) {
         yield put({ type: 'query' })
