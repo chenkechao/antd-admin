@@ -49,10 +49,6 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig, onSelectServer, onJobSta
       dataIndex: 'instance.port',
       key: 'port',
     }, {
-      title: 'gtid',
-      dataIndex: 'instance.gtid',
-      key: 'gtid',
-    }, {
       title: 'serverId',
       dataIndex: 'instance.serverId',
       key: 'serverId',
