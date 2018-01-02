@@ -154,7 +154,7 @@ export default modelExtend(pageModel, {
     * showRule ({ payload }, { call, put }) {
       const jobModel = yield call(getRuleListByJobId, payload )
       let currentItemRule = {}
-      if (jobModel.rules.length > 0) {
+      if (jobModel.rules != null && jobModel.rules.length > 0) {
         currentItemRule = jobModel.rules[0]
       }
       yield put({
