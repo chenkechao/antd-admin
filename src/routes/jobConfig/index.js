@@ -111,9 +111,18 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (data) {
-      currentItem.rules[currentItem.rules.length - 1].rule = data.rule
-      //  db转换成数组
-      currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+      if (modalType == 'updateRule'){
+        console.log(currentItemMapping)
+        for(var item in currentItem.rules){
+          if(currentItem.rules[item].rule == data.rule){
+            currentItem.rules[item] = data;
+          }
+        }
+      } else {
+        currentItem.rules[currentItem.rules.length - 1].rule = data.rule
+        //  db转换成数组
+        currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+      }
 
       dispatch({
         type: 'jobConfig/showAddMappingModal',
@@ -124,15 +133,27 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       })
     },
     onAddRuleOk (data) {
-      currentItem.rules[currentItem.rules.length - 1].rule = data.rule
-      //  db转换成数组
-      currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+      if (modalType == 'updateRule'){
+        console.log(rule.currentItemRule)
+        for(var item in currentItem.rules){
+          if(currentItem.rules[item].rule == rule.currentItemRule.rule){
+            data.db = data.db.split(',');
+            data.mapping = rule.currentItemRule.mapping
+            currentItem.rules[item] = data
+          }
+        }
+      } else {
+        currentItem.rules[currentItem.rules.length - 1].rule = data.rule
+        //  db转换成数组
+        currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+      }
       //  保存rule到后台
       // dispatch({
       //   type: 'jobConfig/hideAddRuleModal',
       // })
       dispatch({
-        type: `jobConfig/${modalType}`,
+        // type: `jobConfig/${modalType}`,
+        type: `jobConfig/createRule`,
         payload: currentItem,
       })
     },
@@ -156,7 +177,6 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     width: 800,
     onAddMappingOk (data) {
       //  如果没有mapping数组先构建
-      console.log("itemMapping"+currentItemMapping)
       if (!currentItemMapping.hasOwnProperty('mapping')) {
         currentItemMapping.mapping = []
       }
