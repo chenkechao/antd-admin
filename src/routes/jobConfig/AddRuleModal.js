@@ -39,6 +39,19 @@ const modal = ({
     })
   }
 
+  const onAddMappings = () => {
+    validateFields((errors) => {
+      if (errors) {
+        return
+      }
+      const data = {
+        ...getFieldsValue(),
+        key: item.key,
+      }
+      onAddMapping(data)
+    })
+  }
+
   const mappingListProps = {
     dataSource: item.mapping,
     pagination: false,
@@ -101,7 +114,7 @@ const modal = ({
           })(<Input />)}
         </FormItem>
       </Form>
-      <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
+      <Button size="large" type="ghost" onClick={onAddMappings}>添加mapping</Button>
       <MappingList {...mappingListProps} />
     </Modal>
   )

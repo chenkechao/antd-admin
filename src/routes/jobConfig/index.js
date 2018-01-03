@@ -110,12 +110,16 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     title: `${modalType === 'createRule' ? '新增规则' : '更新规则'}`,
     wrapClassName: 'vertical-center-modal',
     width: 1200,
-    onAddMapping (item) {
+    onAddMapping (data) {
+      currentItem.rules[currentItem.rules.length - 1].rule = data.rule
+      //  db转换成数组
+      currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+
       dispatch({
         type: 'jobConfig/showAddMappingModal',
         payload: {
           modalType: 'createMapping',
-          currentItemMapping: rule.currentItemRule,
+          currentItemMapping: currentItem.rules[currentItem.rules.length - 1],
         },
       })
     },
