@@ -99,7 +99,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="regex" />)}
         </FormItem>
         <FormItem label="数据库列表" hasFeedback {...formItemLayout}>
           {getFieldDecorator('db', {
@@ -111,7 +111,7 @@ const modal = ({
                 message: '数据库每项必须用，号隔开',
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="orderdb_pro_03,orderdb_pro_04" />)}
         </FormItem>
       </Form>
       <Button size="large" type="ghost" onClick={onAddMappings}>添加mapping</Button>

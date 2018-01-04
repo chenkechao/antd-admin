@@ -54,7 +54,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="order_0" />)}
         </FormItem>
         <FormItem label="logical_table" hasFeedback {...formItemLayout}>
           {getFieldDecorator('logical_table', {
@@ -64,7 +64,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="order" />)}
         </FormItem>
         <FormItem label="topic" hasFeedback {...formItemLayout}>
           {getFieldDecorator('topic', {
@@ -74,7 +74,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="aries_binlog_order" />)}
         </FormItem>
         <FormItem label="columns" hasFeedback {...formItemLayout}>
           {getFieldDecorator('columns', {
@@ -86,7 +86,7 @@ const modal = ({
                 message: 'column每项必须用，号隔开',
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder='id","name"' />)}
         </FormItem>
         <FormItem label="key" hasFeedback {...formItemLayout}>
           {getFieldDecorator('key', {
@@ -96,7 +96,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="{table_l4}" />)}
         </FormItem>
       </Form>
     </Modal>
