@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal } from 'antd'
+import { Form, Input, Modal,Select  } from 'antd'
 
 const FormItem = Form.Item
+const Option = Select.Option
 
 const formItemLayout = {
   labelCol: {
@@ -32,6 +33,7 @@ const modal = ({
         ...getFieldsValue(),
         key: item.key,
       }
+      console.log(data)
       onOk(data)
     })
   }
@@ -52,7 +54,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="job-127.0.0.1" />)}
         </FormItem>
         <FormItem label="ip" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.ip', {
@@ -62,7 +64,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="127.0.0.1" />)}
         </FormItem>
         <FormItem label="port" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.port', {
@@ -72,7 +74,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="3306" />)}
         </FormItem>
         <FormItem label="userName" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.userName', {
@@ -82,7 +84,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="root" />)}
         </FormItem>
         <FormItem label="password" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.password', {
@@ -92,7 +94,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="123456" />)}
         </FormItem>
         <FormItem label="gtid" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.gtid', {
@@ -102,7 +104,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="" />)}
         </FormItem>
         <FormItem label="serverId" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.serverId', {
@@ -112,7 +114,31 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input />)}
+          })(<Input placeholder="81001" />)}
+        </FormItem>
+        <FormItem label="type" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('message.type', {
+            initialValue: item.message.type,
+            rules: [
+              {
+                required: true,
+              },
+            ],
+          })(
+            <Select defaultValue="kafka" style={{ width: 200 }}>
+              <Option value="kafka">kafka</Option>
+            </Select>
+          )}
+        </FormItem>
+        <FormItem label="connector" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('message.connector', {
+            initialValue: item.message.connector,
+            rules: [
+              {
+                required: true,
+              },
+            ],
+          })(<Input placeholder="10.9.35.69:9092" />)}
         </FormItem>
       </Form>
     </Modal>

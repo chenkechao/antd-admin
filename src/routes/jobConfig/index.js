@@ -22,6 +22,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   const { pageSize } = pagination
   let modalItem = {}
   modalItem.instance = {}
+  modalItem.message = {}
 
   // 添加job modal配置
   const modalProps = {
@@ -137,7 +138,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
         console.log(rule.currentItemRule)
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == rule.currentItemRule.rule){
-            data.db = data.db.split(',');
+            data.db = data.db.split(',')
             data.mapping = rule.currentItemRule.mapping
             currentItem.rules[item] = data
           }
