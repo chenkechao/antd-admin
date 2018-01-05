@@ -24,6 +24,12 @@ const modal = ({
   },
   ...modalProps
 }) => {
+  // 编辑进来时,jobId默认置灰
+  let isDisabled = null
+  if (item.jobId != null) {
+    isDisabled = true
+  }
+
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -54,7 +60,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input placeholder="job-127.0.0.1" />)}
+          })(<Input placeholder="job-127.0.0.1" disabled={isDisabled} />)}
         </FormItem>
         <FormItem label="ip" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.ip', {
