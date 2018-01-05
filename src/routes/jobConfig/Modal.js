@@ -118,7 +118,7 @@ const modal = ({
         </FormItem>
         <FormItem label="type" hasFeedback {...formItemLayout}>
           {getFieldDecorator('message.type', {
-            initialValue: item.message.type,
+            initialValue: item.message != null ? item.message.type : null,
             rules: [
               {
                 required: true,
@@ -132,13 +132,18 @@ const modal = ({
         </FormItem>
         <FormItem label="connector" hasFeedback {...formItemLayout}>
           {getFieldDecorator('message.connector', {
-            initialValue: item.message.connector,
+            initialValue: item.message != null ? item.message.connector : null,
             rules: [
               {
                 required: true,
               },
             ],
           })(<Input placeholder="10.9.35.69:9092" />)}
+        </FormItem>
+        <FormItem label="rules" style={{ display: 'none' }} hasFeedback {...formItemLayout}>
+          {getFieldDecorator('rules', {
+            initialValue: item.rules != null ? item.rules : null,
+          })(<Input style={{ display: 'none' }} />)}
         </FormItem>
       </Form>
     </Modal>
