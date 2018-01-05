@@ -154,6 +154,7 @@ export default modelExtend(pageModel, {
     * showRule ({ payload }, { call, put }) {
       const jobModel = yield call(getRuleListByJobId, payload )
       let currentItemRule = {}
+      // 默认选中第一条rule
       if (jobModel.rules != null && jobModel.rules.length > 0) {
         currentItemRule = jobModel.rules[0]
       }

@@ -90,6 +90,7 @@ const modal = ({
       let rule = {
         currentItemRule: item,
         ruleModalVisible: true,
+        selectRow: selectRow,
       }
       dispatch({
         type: 'jobConfig/showAddRuleModal',
@@ -100,7 +101,7 @@ const modal = ({
       })
     },
     rowSelection: {
-      //  selectedRowKeys,
+      selectedRowKeys:[currentItemRule.rule],
       onChange: (keys) => {
         // dispatch({
         //   type: 'jobConfig/updateState',
