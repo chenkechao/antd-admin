@@ -72,6 +72,8 @@ const modal = ({
             rules: [
               {
                 required: true,
+                pattern: /^\d{1,9}$/,
+                message: '必须为数字',
               },
             ],
           })(<Input placeholder="3306" />)}
@@ -112,6 +114,8 @@ const modal = ({
             rules: [
               {
                 required: true,
+                pattern: /^\d{1,9}$/,
+                message: '必须为数字',
               },
             ],
           })(<Input placeholder="81001" />)}
