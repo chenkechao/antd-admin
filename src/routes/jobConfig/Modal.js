@@ -116,9 +116,9 @@ const modal = ({
             ],
           })(<Input placeholder="81001" />)}
         </FormItem>
-        <FormItem label="type" hasFeedback {...formItemLayout}>
+        <FormItem label="type"  hasFeedback {...formItemLayout}>
           {getFieldDecorator('message.type', {
-            initialValue: item.message != null ? item.message.type : null,
+            initialValue: item.message.type != null ? item.message.type : 'kafka',
             rules: [
               {
                 required: true,
@@ -132,7 +132,7 @@ const modal = ({
         </FormItem>
         <FormItem label="connector" hasFeedback {...formItemLayout}>
           {getFieldDecorator('message.connector', {
-            initialValue: item.message != null ? item.message.connector : null,
+            initialValue: item.message.connector != null ? item.message.connector : null,
             rules: [
               {
                 required: true,
