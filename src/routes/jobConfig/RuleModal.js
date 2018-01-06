@@ -129,8 +129,10 @@ const modal = ({
 
   return (
     <Modal {...modalOpts}>
-      <Button size="large" type="ghost" onClick={onAddRule}>添加规则</Button>
-      <Button size="large" type="ghost" onClick={onAddMapping}>添加mapping</Button>
+      <div>
+        <Button size="large" type="primary" onClick={onAddRule}>添加规则</Button>
+        <Button size="large" type="primary" style={{ margin: '0px 16px' }} onClick={onAddMapping}>添加mapping</Button>
+      </div>
       {alertVisible && <Alert
         description="请先选择一条规则"
         type="error"

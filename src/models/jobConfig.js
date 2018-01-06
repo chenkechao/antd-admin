@@ -173,6 +173,7 @@ export default modelExtend(pageModel, {
     * createRule ({ payload }, { call, put }) {
       const data = yield call(createRule, payload)
       if (data.success) {
+        yield put({ type: 'hideRuleModal' })
         yield put({ type: 'hideAddRuleModal' })
         yield put({ type: 'hideAddMappingModal' })
         yield put({ type: 'query' })
