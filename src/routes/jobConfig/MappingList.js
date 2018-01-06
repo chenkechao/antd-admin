@@ -70,7 +70,7 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
         columns={columns}
         simple
         rowKey={record => record.table}
-        scroll={{ y: 240 }}
+        scroll={{ y: 400 }}
         getBodyWrapper={getBodyWrapper}
       />
     </div>
