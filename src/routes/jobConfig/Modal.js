@@ -28,6 +28,10 @@ const modal = ({
   let isDisabled = null
   if (item.jobId != null) {
     isDisabled = true
+    // 初始化化message
+    if (item.message == null) {
+      item.message = {}
+    }
   }
 
   const handleOk = () => {

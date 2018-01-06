@@ -62,7 +62,7 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
     return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body }
 
   return (
-    <div>
+    <div style={{ height: '500px' }}>
       <Table
         {...tableProps}
         className={classnames({ [styles.table]: true, [styles.motion]: isMotion })}
@@ -70,6 +70,7 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
         columns={columns}
         simple
         rowKey={record => record.table}
+        scroll={{ y: 240 }}
         getBodyWrapper={getBodyWrapper}
       />
     </div>
