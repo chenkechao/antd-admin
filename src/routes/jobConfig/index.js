@@ -113,6 +113,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (data) {
+      data.db = typeof data.db === 'string' ? data.db.split(',') : data.db
       if (modalType == 'updateRule'){
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == data.rule){
@@ -120,7 +121,6 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
           }
         }
       } else {
-        data.db = data.db.split(',')
         currentItem.rules[currentItem.rules.length - 1].rule = data.rule
         //  db转换成数组
         currentItem.rules[currentItem.rules.length - 1].db = data.db
@@ -135,11 +135,10 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       })
     },
     onAddRuleOk (data) {
-      data.db = data.db.split(',')
+      data.db = typeof data.db === 'string' ? data.db.split(',') : data.db
       if (modalType == 'updateRule'){
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == rule.currentItemRule.rule){
-            data.db = data.db.split(',')
             data.mapping = rule.currentItemRule.mapping
             currentItem.rules[item] = data
           }
@@ -153,11 +152,6 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       dispatch({
         type: 'jobConfig/hideAddRuleModal',
       })
-      // dispatch({
-      //   // type: `jobConfig/${modalType}`,
-      //   type: 'jobConfig/updateRule',
-      //   payload: currentItem,
-      // })
     },
     onCancel () {
       if (modalType === 'createRule') {
