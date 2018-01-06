@@ -113,6 +113,11 @@ const modal = ({
             ],
           })(<Input placeholder="orderdb_pro_03,orderdb_pro_04" />)}
         </FormItem>
+        <FormItem label="mapping" style={{ display: 'none' }} hasFeedback {...formItemLayout}>
+          {getFieldDecorator('mapping', {
+            initialValue: item.mapping != null ? item.mapping : null,
+          })(<Input style={{ display: 'none' }} />)}
+        </FormItem>
       </Form>
       <Button size="large" type="ghost" onClick={onAddMappings}>添加mapping</Button>
       <MappingList {...mappingListProps} />

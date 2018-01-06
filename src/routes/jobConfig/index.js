@@ -112,17 +112,17 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (data) {
-      console.log('fdasfa')
+      data.db = data.db.split(',')
       if (modalType == 'updateRule'){
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == data.rule){
-            currentItem.rules[item] = data;
+            currentItem.rules[item] = data
           }
         }
       } else {
         currentItem.rules[currentItem.rules.length - 1].rule = data.rule
         //  db转换成数组
-        currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+        currentItem.rules[currentItem.rules.length - 1].db = data.db
       }
 
       dispatch({
@@ -134,8 +134,8 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       })
     },
     onAddRuleOk (data) {
+      data.db = data.db.split(',')
       if (modalType == 'updateRule'){
-        console.log(rule.currentItemRule)
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == rule.currentItemRule.rule){
             data.db = data.db.split(',')
@@ -146,7 +146,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       } else {
         currentItem.rules[currentItem.rules.length - 1].rule = data.rule
         //  db转换成数组
-        currentItem.rules[currentItem.rules.length - 1].db = data.db.split(',')
+        currentItem.rules[currentItem.rules.length - 1].db = data.db
       }
       //  保存rule到后台
       // dispatch({

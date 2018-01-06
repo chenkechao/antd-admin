@@ -282,7 +282,8 @@ export default modelExtend(pageModel, {
       return { ...state, ...payload, addMappingModalVisible: true }
     },
     hideAddMappingModal (state) {
-      return { ...state, addMappingModalVisible: false, modalType: 'createRule' }
+      // let typea = 'createRule'
+      return { ...state, addMappingModalVisible: false }
     },
     showSelectServerModal (state, { payload }) {
       //  state.zk.selectServerModalVisible = true
