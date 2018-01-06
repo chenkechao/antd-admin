@@ -184,7 +184,11 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
           }
         }
       } else {
-        currentItem.rules[currentItem.rules.length - 1].mapping = data
+        //  如果没有mapping数组先构建
+        if (!currentItemMapping.hasOwnProperty('mapping')) {
+          currentItemMapping.mapping = []
+        }
+        currentItemMapping.mapping.push(data)
       }
 
       // console.log('fdassfas')
