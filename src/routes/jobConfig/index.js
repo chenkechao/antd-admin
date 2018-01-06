@@ -172,13 +172,29 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 800,
     onAddMappingOk (data) {
-      //  如果没有mapping数组先构建
-      if (!currentItemMapping.hasOwnProperty('mapping')) {
-        currentItemMapping.mapping = []
+      data.columns = typeof data.columns === 'string' ? data.columns.split(',') : data.columns
+      if (modalType == 'updateMapping'){
+        for(var item in currentItem.rules){
+          if(currentItem.rules[item].rule == rule.currentItemRule.rule){
+            for(var itemMapping in currentItem.rules[item].mapping){
+              if(currentItem.rules[item].mapping[itemMapping].table == data.table){
+                currentItem.rules[item].mapping[itemMapping] = data
+              }
+            }
+          }
+        }
+      } else {
+        currentItem.rules[currentItem.rules.length - 1].mapping = data
       }
-      //  columns转换成数组
-      data.columns = data.columns.split(',')
-      currentItemMapping.mapping.push(data)
+
+      // console.log('fdassfas')
+      // //  如果没有mapping数组先构建
+      // if (!currentItemMapping.hasOwnProperty('mapping')) {
+      //   currentItemMapping.mapping = []
+      // }
+      // //  columns转换成数组
+      // data.columns = data.columns.split(',')
+      // currentItemMapping.mapping.push(data)
       // dispatch({
       //   type: 'jobConfig/createRule',
       //   payload: currentItem,

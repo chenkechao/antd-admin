@@ -25,6 +25,11 @@ const modal = ({
   },
   ...modalProps
 }) => {
+  // 编辑进来时,table默认置灰
+  let isDisabled = null
+  if (itemMapping.table != null) {
+    isDisabled = true
+  }
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -54,7 +59,7 @@ const modal = ({
                 required: true,
               },
             ],
-          })(<Input placeholder="order_0" />)}
+          })(<Input placeholder="order_0" disabled={isDisabled} />)}
         </FormItem>
         <FormItem label="logical_table" hasFeedback {...formItemLayout}>
           {getFieldDecorator('logical_table', {
