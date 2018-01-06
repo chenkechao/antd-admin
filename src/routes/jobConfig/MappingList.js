@@ -19,7 +19,7 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
       confirm({
         title: '确定要删除吗?',
         onOk () {
-          onDeleteItem(record.id)
+          onDeleteItem(record)
         },
       })
     }
@@ -42,16 +42,16 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
       title: 'key',
       dataIndex: 'key',
       key: 'key',
-    // }, {
-    //   title: '操作',
-    //   key: 'operation',
-    //   width: 100,
-    //   render: (text, record) => {
-    //     return <DropOption onMenuClick={e => handleMenuClick(record, e)}
-    //       menuOptions={[
-    //         { key: '1', name: '编辑' },
-    //         { key: '2', name: '删除' }]} />
-    //   },
+    }, {
+      title: '操作',
+      key: 'operation',
+      width: 100,
+      render: (text, record) => {
+        return <DropOption onMenuClick={e => handleMenuClick(record, e)}
+          menuOptions={[
+            { key: '1', name: '编辑' },
+            { key: '2', name: '删除' }]} />
+      },
     },
   ]
 
@@ -69,7 +69,7 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
         bordered
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record.table}
         getBodyWrapper={getBodyWrapper}
       />
     </div>

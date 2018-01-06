@@ -26,10 +26,15 @@ const modal = ({
     dataSource: currentItemRule.mapping,
     pagination: false,
     useFixedHeader: true, // 固定表头
-    onDeleteItem (id) {
+    onDeleteItem (record) {
+      currentItemRule.mapping.pop(record)
+      let ruleNew = Object.assign({}, rule)// 克隆一个新的rule对象
+      ruleNew.currentItemRule = currentItemRule
       dispatch({
-        type: 'jobConfig/delete',
-        payload: id,
+        type: 'jobConfig/updateState',
+        payload: {
+          rule: ruleNew,
+        },
       })
     },
     onEditItem (record) {
