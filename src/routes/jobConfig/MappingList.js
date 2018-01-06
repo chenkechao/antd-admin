@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal } from 'antd'
+import { Table, Modal, Tag } from 'antd'
 import classnames from 'classnames'
 import { DropOption } from 'components'
 //  import { Link } from 'react-router-dom'
@@ -38,6 +38,17 @@ const MappingList = ({ onDeleteItem, onEditItem, isMotion, location, ...tablePro
       title: 'topic',
       dataIndex: 'topic',
       key: 'topic',
+    }, {
+      title: 'columns',
+      key: 'columns',
+      width: 300,
+      render: (text, record) => {
+        if (record.hasOwnProperty('columns')&&record.columns != null) {
+          return record.columns.map((item) => {
+            return <Tag color="blue">{item}</Tag>
+          })
+        }
+      },
     }, {
       title: 'key',
       dataIndex: 'key',

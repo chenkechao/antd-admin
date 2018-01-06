@@ -22,7 +22,7 @@ const modal = ({
   }
 
   const mappingListProps = {
-    title: () => currentItemRule.rule,
+    title: () => ('当前选中的规则名：' + currentItemRule.rule + ", 对应的mapping列表如下"),
     dataSource: currentItemRule.mapping,
     pagination: false,
     useFixedHeader: true, // 固定表头
