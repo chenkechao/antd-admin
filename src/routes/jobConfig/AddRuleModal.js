@@ -107,7 +107,7 @@ const modal = ({
             rules: [
               {
                 required: true,
-                pattern: /,+/,
+                pattern: /^\w+(,\w+)*$/,
                 message: '数据库每项必须用，号隔开',
               },
             ],

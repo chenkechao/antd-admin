@@ -112,8 +112,8 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
     wrapClassName: 'vertical-center-modal',
     width: 1200,
     onAddMapping (data) {
+      console.log('fdasfa')
       if (modalType == 'updateRule'){
-        console.log(currentItemMapping)
         for(var item in currentItem.rules){
           if(currentItem.rules[item].rule == data.rule){
             currentItem.rules[item] = data;
@@ -184,13 +184,13 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
       //  columns转换成数组
       data.columns = data.columns.split(',')
       currentItemMapping.mapping.push(data)
-      dispatch({
-        type: 'jobConfig/createRule',
-        payload: currentItem,
-      })
       // dispatch({
-      //   type: 'jobConfig/hideAddMappingModal',
+      //   type: 'jobConfig/createRule',
+      //   payload: currentItem,
       // })
+      dispatch({
+        type: 'jobConfig/hideAddMappingModal',
+      })
     },
     onCancel () {
       dispatch({

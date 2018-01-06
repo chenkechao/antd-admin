@@ -82,7 +82,7 @@ const modal = ({
             rules: [
               {
                 required: true,
-                pattern: /,+/,
+                pattern: /^\w+(,\w+)*$/,
                 message: 'column每项必须用，号隔开',
               },
             ],
