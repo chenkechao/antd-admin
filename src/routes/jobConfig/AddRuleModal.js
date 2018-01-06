@@ -15,6 +15,7 @@ const formItemLayout = {
 }
 
 const modal = ({
+  rule,
   item = {},
   onAddRuleOk,
   onAddMapping,
@@ -55,10 +56,15 @@ const modal = ({
   const mappingListProps = {
     dataSource: item.mapping,
     pagination: false,
-    onDeleteItem (id) {
+    onDeleteItem (record) {
+      item.mapping.pop(record)
+      let ruleNew = Object.assign({}, rule)// 克隆一个新的rule对象
+      ruleNew.currentItemRule = item
       dispatch({
-        type: 'jobConfig/delete',
-        payload: id,
+        type: 'jobConfig/updateState',
+        payload: {
+          rule: ruleNew,
+        },
       })
     },
     onEditItem (record) {
@@ -126,6 +132,7 @@ const modal = ({
 }
 
 modal.propTypes = {
+  rule: PropTypes.object,
   form: PropTypes.object.isRequired,
   type: PropTypes.string,
   item: PropTypes.object,

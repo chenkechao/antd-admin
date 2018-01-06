@@ -106,6 +106,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
 
   // 添加rule modal
   const addRuleModalProps = {
+    rule: rule,
     item: rule.currentItemRule,
     visible: addRuleModalVisible,
     dispatch: dispatch,
@@ -190,19 +191,6 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
         }
         currentItemMapping.mapping.push(data)
       }
-
-      // console.log('fdassfas')
-      // //  如果没有mapping数组先构建
-      // if (!currentItemMapping.hasOwnProperty('mapping')) {
-      //   currentItemMapping.mapping = []
-      // }
-      // //  columns转换成数组
-      // data.columns = data.columns.split(',')
-      // currentItemMapping.mapping.push(data)
-      // dispatch({
-      //   type: 'jobConfig/createRule',
-      //   payload: currentItem,
-      // })
       dispatch({
         type: 'jobConfig/hideAddMappingModal',
       })
