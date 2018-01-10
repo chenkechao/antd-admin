@@ -86,7 +86,6 @@ const modal = ({
             initialValue: itemMapping.columns,
             rules: [
               {
-                required: true,
                 pattern: /^\w+(,\w+)*$/,
                 message: 'column每项必须用，号隔开',
               },
@@ -96,11 +95,6 @@ const modal = ({
         <FormItem label="key" hasFeedback {...formItemLayout}>
           {getFieldDecorator('key', {
             initialValue: itemMapping.key,
-            rules: [
-              {
-                required: true,
-              },
-            ],
           })(<Input placeholder="{table_l4}" />)}
         </FormItem>
       </Form>
