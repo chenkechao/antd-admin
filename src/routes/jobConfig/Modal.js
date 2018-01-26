@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal,Select  } from 'antd'
+import { Form, Input, Modal, Select } from 'antd'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -111,11 +111,6 @@ const modal = ({
         <FormItem label="gtid" hasFeedback {...formItemLayout}>
           {getFieldDecorator('instance.gtid', {
             initialValue: item.instance.gtid,
-            rules: [
-              {
-                required: true,
-              },
-            ],
           })(<Input placeholder="" />)}
         </FormItem>
         <FormItem label="serverId" hasFeedback {...formItemLayout}>
@@ -130,16 +125,12 @@ const modal = ({
             ],
           })(<Input placeholder="81001" />)}
         </FormItem>
-        <FormItem label="type"  hasFeedback {...formItemLayout}>
+        <FormItem label="type" hasFeedback {...formItemLayout}>
           {getFieldDecorator('message.type', {
             initialValue: item.message.type != null ? item.message.type : '',
-            rules: [
-              {
-                required: true,
-              },
-            ],
           })(
-            <Select defaultValue="kafka" style={{ width: 200 }}>
+            <Select defaultValue="" style={{ width: 200 }}>
+              <Option value=""></Option>
               <Option value="kafka">kafka</Option>
             </Select>
           )}
