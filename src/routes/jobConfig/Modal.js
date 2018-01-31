@@ -132,6 +132,7 @@ const modal = ({
             <Select defaultValue="" style={{ width: 200 }}>
               <Option value=""></Option>
               <Option value="kafka">kafka</Option>
+              <Option value="rocketmq">rocketmq</Option>
             </Select>
           )}
         </FormItem>

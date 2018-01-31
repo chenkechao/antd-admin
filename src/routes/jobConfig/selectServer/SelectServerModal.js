@@ -22,6 +22,7 @@ const modal = ({
       getCheckboxProps(record) {
         return {
           defaultChecked: record.select === true, // 配置默认勾选的列
+          // disabled: record.status === false,
         }
       },
       onChange: (selectedRowKeys, selectedRows ) => {
