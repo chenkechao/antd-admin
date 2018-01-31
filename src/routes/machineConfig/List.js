@@ -58,8 +58,10 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig,
         let runningTag
         if (record.status == 1) {
           runningTag = <Tag color="green">正在运行</Tag>
-        } else {
+        } else if(record.status == 0){
           runningTag = <Tag color="red">已经停止</Tag>
+        }else if(record.status == 2){
+          runningTag = <Tag color="blue">备机状态</Tag>
         }
         return (<div>
           {runningTag}
@@ -73,8 +75,10 @@ const List = ({ onDeleteItem, onEditItem, onRuleConfig,
         let button
         if (record.status == 1) {
           button = <Button type="primary" onClick={e => stopJob(record, e)}>停止</Button>
-        } else {
+        } else if(record.status == 0){
           button = <Button type="primary" onClick={e => startJob(record, e)}>启动</Button>
+        }else if(record.status == 2){
+          button = <Button type="primary" onClick={e => stopJob(record, e)}>停止</Button>
         }
         return (<div>
           {button}
