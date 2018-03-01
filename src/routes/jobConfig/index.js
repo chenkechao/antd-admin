@@ -23,6 +23,7 @@ const JobConfig = ({ location, dispatch, jobConfig, loading }) => {
   let modalItem = {}
   modalItem.instance = {}
   modalItem.message = {}
+  modalItem.filter = {}
 
   // 添加job modal配置
   const modalProps = {

@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Modal, Select } from 'antd'
+import { Form, Input, Modal, Select, Switch, Checkbox } from 'antd'
 
 const FormItem = Form.Item
 const Option = Select.Option
+const CheckboxGroup = Checkbox.Group
 
 const formItemLayout = {
   labelCol: {
@@ -13,6 +14,8 @@ const formItemLayout = {
     span: 14,
   },
 }
+
+const plainOptions = ['IGNORE_UPDATE_STATEMENT', 'IGNORE_DELETE_STATEMENT', 'SKIP_UPDATE_STATEMENT', 'SKIP_DELETE_STATEMENT', 'SKIP_LARGE_TRANSACTION',]
 
 const modal = ({
   item = {},
@@ -32,7 +35,20 @@ const modal = ({
     if (item.message == null) {
       item.message = {}
     }
+    // 初始化化filter
+    if (item.filter == null) {
+      item.filter = {}
+    }
   }
+
+  function onChange (isChecked) {
+    if (isChecked) {
+      item.filter.sswitch = 'on'
+    } else {
+      item.filter.sswitch = 'off'
+    }
+  }
+
 
   const handleOk = () => {
     validateFields((errors) => {
@@ -44,6 +60,14 @@ const modal = ({
         key: item.key,
       }
       console.log(data)
+      if (typeof data.filter.strategy === 'object') {
+        data.filter.strategy = data.filter.strategy.join(',')
+      }
+      if (data.filter.sswitch === true) {
+        data.filter.sswitch = 'on'
+      }else if(data.filter.sswitch === false) {
+        data.filter.sswitch = 'off'
+      }
       onOk(data)
     })
   }
@@ -140,6 +164,19 @@ const modal = ({
           {getFieldDecorator('message.connector', {
             initialValue: item.message.connector != null ? item.message.connector : null,
           })(<Input placeholder="10.9.35.69:9092" />)}
+        </FormItem>
+
+        <FormItem label="sswitch" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('filter.sswitch', {
+            initialValue: item.filter.sswitch != null ? (item.filter.sswitch === 'on'? true:false) : 'on',
+          })(
+            <Switch defaultChecked={true} checked={(item.filter.sswitch === 'on' || item.filter.sswitch == null) ? true:false} onChange={onChange} />
+          )}
+        </FormItem>
+        <FormItem label="strategy" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('filter.strategy', {
+            initialValue: item.filter.strategy != null ? item.filter.strategy.split(',') : null,
+          })(<CheckboxGroup options={plainOptions} />)}
         </FormItem>
         <FormItem label="rules" style={{ display: 'none' }} hasFeedback {...formItemLayout}>
           {getFieldDecorator('rules', {
