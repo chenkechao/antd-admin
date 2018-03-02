@@ -60,13 +60,17 @@ const modal = ({
         key: item.key,
       }
       console.log(data)
-      if (typeof data.filter.strategy === 'object') {
-        data.filter.strategy = data.filter.strategy.join(',')
-      }
-      if (data.filter.sswitch === true) {
-        data.filter.sswitch = 'on'
-      }else if(data.filter.sswitch === false) {
-        data.filter.sswitch = 'off'
+      if (data.filter.strategy != null) {
+        if (typeof data.filter.strategy === 'object') {
+          data.filter.strategy = data.filter.strategy.join(',')
+        }
+        if (data.filter.sswitch === true) {
+          data.filter.sswitch = 'on'
+        } else if (data.filter.sswitch === false) {
+          data.filter.sswitch = 'off'
+        }
+      } else {
+        data.filter =  null
       }
       onOk(data)
     })
