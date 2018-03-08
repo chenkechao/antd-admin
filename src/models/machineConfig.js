@@ -17,7 +17,7 @@ export default modelExtend(pageModel, {
     setup ({ dispatch, history }) {
       history.listen((location) => {
         if (location.pathname === '/machineConfig') {
-          const payload = location.query || { current: 1, pageSize: 30 }
+          const payload = location.query || { current: 1, pageSize: 100 }
           dispatch({
             type: 'query',
             payload,
@@ -37,7 +37,7 @@ export default modelExtend(pageModel, {
             list: data.data,
             pagination: {
               current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 30,
+              pageSize: Number(payload.pageSize) || 100,
               total: data.total,
             },
           },
