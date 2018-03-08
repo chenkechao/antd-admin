@@ -85,7 +85,6 @@ const Routers = function ({ history, app }) {
     <ConnectedRouter history={history}>
       <App>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/jobConfig" />)} />
           {
             routes.map(({ path, ...dynamics }, key) => (
               <Route key={key}
@@ -98,7 +97,7 @@ const Routers = function ({ history, app }) {
               />
             ))
           }
-          <Route component={error} />
+          <Route path="/" render={() => (<Redirect to="/jobConfig" />)} />
         </Switch>
       </App>
     </ConnectedRouter>

@@ -19,23 +19,28 @@ export default {
       "changeOrigin": true,
       "pathRewrite": { "^/api/v1/weather": "/v3/weather" }
     },
-    "/api/jobConfig": {
-      "target": "http://127.0.0.1:8089",
+    "/api/menus": {
       "changeOrigin": true,
+      "target": "http://127.0.0.1:8087",
+      "pathRewrite": { "^/menus" : "/menus" }
+    },
+    "/api/jobConfig": {
+      "changeOrigin": true,
+      "target": "http://127.0.0.1:8087",
       "pathRewrite": { "^/jobConfigs" : "/jobConfig" }
     },
     "/api/ruleConfig": {
-      "target": "http://127.0.0.1:8089",
+      "target": "http://127.0.0.1:8087",
       "changeOrigin": true,
       "pathRewrite": { "^/ruleConfig" : "/ruleConfig" }
     },
     "/api/machineConfig": {
-      "target": "http://127.0.0.1:8089",
+      "target": "http://127.0.0.1:8087",
       "changeOrigin": true,
       "pathRewrite": { "^/machineConfig" : "/machineConfig" }
     },
     "/api/zk": {
-      "target": "http://127.0.0.1:8089",
+      "target": "http://127.0.0.1:8087",
       "changeOrigin": true,
       "pathRewrite": { "^/zk" : "/zk" }
     },
